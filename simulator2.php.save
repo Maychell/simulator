@@ -1,0 +1,23 @@
+<?php
+
+$conexao = mysql_pconnect("localhost","root","adminsa");
+mysql_select_db("energy",$conexao);
+
+$query = "SELECT * FROM consumptions WHERE meter_id ="+$_POST['meter_id']+" ORDER BY id DESC LIMIT 1";
+$resultado = mysql_query($query,$conexao);
+
+while ($linha = mysql_fetch_array($result
+	if(($linha['updated_at']-current_time)>=2){
+		//ele deve inserir um novo registro nessa tabela (consumptions)
+			$query = "INSERT INTO consumptions (meter_id, created_at)"+
+			 " VALUES ("+$_POST['meter_id']+", "+current_time+")";
+	}
+	else{
+		$query = "UPDATE consumptions SET updated_at = "+current_time+
+			 "WHERE meter_id = "+$_POST['meter_id'];
+	}
+	$resultado = mysql_query($query,$conexao);
+
+echo "funcionou ";//+meter_id;
+
+?>

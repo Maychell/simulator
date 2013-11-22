@@ -1,0 +1,50 @@
+<html>
+<head>
+</head>
+<body>
+        <form id="startStop" action="simulator2.php" method="POST">
+                ID do medidor: <input type="text" name="meter_id"><br>
+                <input id="start" type="submit" onClick="begin();" value="Iniciar">
+                <input name="stop" type="submit" onClick="end();" value="Parar">
+        </form>
+
+<?php
+        if($_POST){
+                echo (.$_POST['meter_id']);
+        }
+?>
+</body>
+<script type="text/javascript" language="javascript">
+
+var myVar;
+
+function begin()
+{
+	//myVar=setTimeout(function(){alert("Hello")},3000);
+        ///var meter_id = document.getElementById("meter_id");
+        $('#start').click(function(){
+                var dados = $('#startStop').serialize();
+
+                $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: 'simulador2.php',
+                        async: true,
+                        data: dados,
+                        sucess: function(response) {
+                                location.reload();
+                        }
+                });
+
+                return false;
+        });
+}
+
+function end()
+{
+	clearTimeout(myVar);
+}
+
+</script>
+</html>
+
