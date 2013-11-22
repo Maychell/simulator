@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-        <form id="startStop" action="simulator2.php" method="post">
+        <form id="startStop" method="post">
                 ID do medidor: <input type="text" name="meter_id"><br>
                 <input id="start" type="submit" onClick="begin();" value="Iniciar">
                 <input name="stop" type="submit" onClick="end();" value="Parar">
@@ -22,7 +22,8 @@
 var myVar;
 
 function begin(){
-	myVar = window.setInterval(begin_insert(), 1000);
+	///myVar = window.setInterval(begin_insert(), 1000);
+	myVar = setInterval(function(){alert("Hello")},3000);;
 }
 
 function begin_insert()
@@ -32,7 +33,7 @@ function begin_insert()
 ///        $('#ini').click(function(){
 
 ///                var dados = $('#startStop').serialize();
-
+/*
                 $.post({
 alert("djsouhdsauidhsai");
                         type: 'POST',
@@ -46,17 +47,18 @@ alert("djsouhdsauidhsai");
                         sucess: function(response) {
                                 location.reload();
                         }
-                });
+                });*/
 alert("fdsfsdf");
 
-                return false;
+                //return false;
 ///        });
 ///});
 }
 
 function end()
 {
-	clearTimeout(myVar);
+	alert("foii");
+	clearInterval(myVar);
 }
 
 </script>
