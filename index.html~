@@ -1,66 +1,35 @@
 <html>
-<head>
-</head>
-<body>
-        <form id="startStop" method="post">
-                ID do medidor: <input type="text" name="meter_id"><br>
-                <input id="start" type="submit" onClick="begin();" value="Iniciar">
-                <input name="stop" type="submit" onClick="end();" value="Parar">
-        </form>
-
-<?php
-        if($_POST){
-                echo (.$_POST['meter_id']);
-        }
-?>
-</body>
-
-<script type="text/javascript" 
-   src="js/jquery/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" language="javascript">
-
-var myVar;
-
-function begin(){
-	///myVar = window.setInterval(begin_insert(), 1000);
-	myVar = setInterval(function(){alert("Hello")},3000);;
-}
-
-function begin_insert()
-{
-        ///var meter_id = document.getElementById("meter_id");
-///$(document).ready(function(){
-///        $('#ini').click(function(){
-
-///                var dados = $('#startStop').serialize();
-/*
-                $.post({
-alert("djsouhdsauidhsai");
-                        type: 'POST',
-                        dataType: 'json',
-                        url: 'simulator2.php',
-                        async: true,
-			function(data) {
-				$('#start').html(data);
-			}
-                       /// data: dados,
-                        sucess: function(response) {
-                                location.reload();
-                        }
-                });*/
-alert("fdsfsdf");
-
-                //return false;
-///        });
-///});
-}
-
-function end()
-{
-	alert("foii");
-	clearInterval(myVar);
-}
-
-</script>
+    <head>
+        <script type="text/javascript" 
+           src="js/jquery/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" language="javascript">
+            var interval_posting;
+ 
+            function postdata() {
+                var meter_id = $('[name="meter_id"]').val();
+                var posting = $.post('simulator2.php', {meter_id:meter_id});
+                posting.done(function (data) {
+                    $('#log').append('<p>' + data + '</p>');
+                });
+            }
+            function start() {
+                interval_posting = window.setInterval(function(){postdata()}, 1000);
+            }
+            function stop() {
+                window.clearInterval(interval_posting);
+            }
+ 
+            $(function () {
+                $('#start').click(function(){alert("fdsfdsfsdf");});
+                $('#stop').click(function(){stop()});
+            })
+        </script>
+    </head>
+    <body>
+            <form id="startStop" action="simulator2.php" method="post">
+                    ID do medidor: <input type="text" name="meter_id"><br>
+                    <a id="start" href="#">Start</a>
+                    <a id="stop" href="#">Stop</a>
+            </form>
+    </body>
 </html>
-
